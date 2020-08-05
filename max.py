@@ -282,6 +282,7 @@ def main():
     getinfo_switch.add_argument("--admincomps",dest="admincomps",default=False,action="store_true",help="Return all computers with admin privileges to another computer [Comp1-AdminTo->Comp2]")
     getinfo_switch.add_argument("--nopassreq",dest="nopassreq",default=False,action="store_true",help="Returns all users that don't require passwords on login")
     getinfo.add_argument("--get-note",dest="getnote",default=False,action="store_true",help="Optional, return the \"notes\" attribute for whatever objects are returned")
+    
     getinfo.add_argument("-l",dest="label",action="store_true",default=False,help="Optional, apply labels to the columns returned")
 
     # MARKOWNED function paramters
