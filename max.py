@@ -92,6 +92,10 @@ def get_info(args):
         "admincomps" : {
             "query": "MATCH (n:Computer),(m:Computer) MATCH (n)-[r:MemberOf|AdminTo*1..]->(m) return n.name,m.name",
             "columns" : ["AdminCompName","CompName"]
+            },
+        "nopassreq" : {
+            "query": "MATCH (n:User) WHERE n.nopasswordreqd=true RETURN n.name",
+            "columns" : ["UserName"]
             }
     }
 
@@ -136,6 +140,9 @@ def get_info(args):
     elif (args.comp != ""):
         query = queries["adminsof"]["query"].format(comp=args.comp.upper().strip())
         cols = queries["adminsof"]["columns"]
+    elif (args.nopassreq != ""):
+        query = queries["nopassreq"]["query"]
+        cols = queries["nopassreq"]["columns"]
 
     if args.getnote:
         query = query + ",n.notes"
@@ -273,7 +280,7 @@ def main():
     getinfo_switch.add_argument("--hvt",dest="hvt",default=False,action="store_true",help="Return all objects that are marked as High Value Targets")
     getinfo_switch.add_argument("--desc",dest="desc",default=False,action="store_true",help="Return all users with the description field populated (also returns description)")
     getinfo_switch.add_argument("--admincomps",dest="admincomps",default=False,action="store_true",help="Return all computers with admin privileges to another computer [Comp1-AdminTo->Comp2]")
-
+    getinfo_switch.add_argument("--nopassreq",dest="nopassreq",default=False,action="store_true",help="Returns all users that don't require passwords on login")
     getinfo.add_argument("--get-note",dest="getnote",default=False,action="store_true",help="Optional, return the \"notes\" attribute for whatever objects are returned")
     getinfo.add_argument("-l",dest="label",action="store_true",default=False,help="Optional, apply labels to the columns returned")
 
