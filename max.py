@@ -94,7 +94,7 @@ def get_info(args):
             "columns" : ["AdminCompName","CompName"]
             },
         "nopassreq" : {
-            "query": "MATCH (n:User) WHERE n.nopasswordreqd=true RETURN n.name",
+            "query": "MATCH (n:User) WHERE n.passwordnotreqd=true RETURN n.name",
             "columns" : ["UserName"]
             }
     }
